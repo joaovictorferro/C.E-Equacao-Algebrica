@@ -1,0 +1,1 @@
+# C.E-Equacao-Algebrica
