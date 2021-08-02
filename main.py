@@ -7,45 +7,61 @@
 #       G      U   I    L    H    E    R    M     E   V    O     L   N   E   Y   M   O    T   A    A    M
 #   IDE: VSCODE
 
-from random import seed
-from random import *
+import numpy as np
 from individual import Individual
 from datetime import datetime
 
 population = []
+roullete = []
 newpopulation = []
 coeficiente =[2,11,11,5,9,2,6,3,12,7,9,8,3,2,4,3,1,7,8,7,3]
 score = 0
 
-seed(100)
+
+def list_as_roulette(soma_total):
+    print("ENTREI AQUI")
+    for ind in population:
+        prop = round((ind.score*100)/soma_total)
+        for j in range(prop):
+            roullete.append(ind)
+    print(len(roullete))
 
 def score():
-    for ind in population:
-        # inteiro = int(ind.individual,2)
-        # print(inteiro)
-
-        cont = 0
-        seq = 0
-        inteiro = 0
-        for i in coeficiente:
-            if seq ==0:
-                cont += i
-            else:
-                inteiro = int(ind.binary, 2)
-                cont += (inteiro**seq) * i
-                print(inteiro)
-            seq += 1
-            ind.score = cont
+    for i in range(len(population)):
+        cromossomo = population[i].cromossomo
+        #print(cromossomo)
+        for j in range(len(cromossomo)):
+            cont = 0
+            seq = 0
+            inteiro = 0
+            config = cromossomo[j].config
+            for coe in coeficiente:
+                if seq ==0:
+                    cont += coe
+                else:
+                    inteiro = config['inteiro']
+                    cont += (inteiro**seq) * coe
+                    #print(inteiro)
+                seq += 1
+            config['score'] = cont
             print(cont)
 
 def init_population():
-  for i in range(20):
-    aleatorio = randint(-13000,13000)
-    individual = Individual(aleatorio)
-    #print(individual.binary)
+  for i in range(1):
+    individual = Individual()
     population.append(individual)
 
 init_population()
-# for ind in population:
-#     print(ind.individual)
+for ind in population:
+    print(ind)
 score()
+#
+# soma_total = 0
+# for ind in population:
+#     soma_total+= ind.score
+# list_as_roulette(soma_total)
+# s = []
+# for m in range(20):
+#     r = np.random.randint(0,len(roullete)-1)
+#     s = roullete[r]
+#     print(s)
