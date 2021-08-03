@@ -1,7 +1,6 @@
 from random import randint, seed
 from datetime import datetime
 import numpy as np
-from cromossomo import Cromossomo
 
 class Individual:
 
